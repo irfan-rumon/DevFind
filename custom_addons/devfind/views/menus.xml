@@ -14,11 +14,5 @@
         action="action_developer"
         sequence="1"/>
 
-    <!-- Technology submenu -->
-    <menuitem 
-        id="menu_devfind_technology"
-        name="Technologies"
-        parent="menu_devfind_root"
-        action="action_technology"
-        sequence="2"/>
+  
 </odoo>

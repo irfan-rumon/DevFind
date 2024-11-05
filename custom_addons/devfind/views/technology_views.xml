@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+     <!-- Form View -->
     <record id="view_technology_form" model="ir.ui.view">
         <field name="name">devfind.technology.form</field>
         <field name="model">devfind.technology</field>
@@ -15,6 +16,7 @@
         </field>
     </record>
 
+    <!-- List View -->
     <record id="view_technology_tree" model="ir.ui.view">
         <field name="name">devfind.technology.list</field>
         <field name="model">devfind.technology</field>
@@ -26,6 +28,7 @@
         </field>
     </record>
 
+     <!-- Action -->
     <record id="action_technology" model="ir.actions.act_window">
         <field name="name">Technologies</field>
         <field name="res_model">devfind.technology</field>
