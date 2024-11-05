@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root menu -->
+    <menuitem 
+        id="menu_devfind_root"
+        name="DevFind"
+        sequence="10"/>
+
+    <!-- Developer submenu -->
+    <menuitem 
+        id="menu_devfind_developer"
+        name="Developers"
+        parent="menu_devfind_root"
+        action="action_developer"
+        sequence="1"/>
+
+    <!-- Technology submenu -->
+    <menuitem 
+        id="menu_devfind_technology"
+        name="Technologies"
+        parent="menu_devfind_root"
+        action="action_technology"
+        sequence="2"/>
+</odoo>

@@ -38,18 +38,4 @@
         <field name="res_model">devfind.developer</field>
         <field name="view_mode">list,form</field>
     </record>
-
-    <!-- Create a root menu for your module -->
-    <menuitem 
-        id="menu_devfind_root"
-        name="DevFind"
-        sequence="10"/>
-
-    <!-- Create a submenu under your root menu -->
-    <menuitem 
-        id="menu_devfind_developer"
-        name="Developers"
-        parent="menu_devfind_root"
-        action="action_developer"
-        sequence="1"/>
 </odoo>
