@@ -9,7 +9,6 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="developer_ids" widget="many2many_tags"/>
                     </group>
                 </sheet>
             </form>
@@ -23,7 +22,6 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="developer_ids" widget="many2many_tags"/>
             </list>
         </field>
     </record>

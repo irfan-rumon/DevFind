@@ -1,5 +1,5 @@
+# First, let's add a computed field to the Developer model (developer.py)
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
 
 class Developer(models.Model):
     _name = 'devfind.developer'
@@ -11,23 +11,32 @@ class Developer(models.Model):
     name = fields.Char(string='Name', required=True)
     email = fields.Char(string='Email', required=True)
     
-    # Many2many field to link developers with their technologies/skills
     technology_ids = fields.Many2many(
-        'devfind.technology',   # model name to link
-        'tech_dev_mapper_rel',  # name of the relation table
-        'developer_id',         # field for developer ID
-        'technology_id',        # field for technology ID
-        string='Technologies'   # label for the field
+        'devfind.technology',
+        'tech_dev_mapper_rel',
+        'developer_id',
+        'technology_id',
+        string='Technologies'
+    )
+
+    # Add this new computed field
+    technologies_list = fields.Char(
+        string='Technologies List',
+        compute='_compute_technologies_list',
+        store=True
     )
 
     min_hourly_rate = fields.Float(string='Min Hourly Rate', required=True)
     max_hourly_rate = fields.Float(string='Max Hourly Rate', required=True)
-
-    # Computed field to show technology count
     technology_count = fields.Integer(
         string='Technology Count',
         compute='_compute_technology_count'
     )
+
+    @api.depends('technology_ids')
+    def _compute_technologies_list(self):
+        for record in self:
+            record.technologies_list = ', '.join(record.technology_ids.mapped('name'))
 
     @api.depends('technology_ids')
     def _compute_technology_count(self):

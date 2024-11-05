@@ -1,41 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- List View -->
+    <record id="view_developer_tree" model="ir.ui.view">
+        <field name="name">devfind.developer.tree</field>
+        <field name="model">devfind.developer</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="technologies_list"/>
+                <field name="min_hourly_rate"/>
+                <field name="max_hourly_rate"/>
+                <field name="technology_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
     <record id="view_developer_form" model="ir.ui.view">
         <field name="name">devfind.developer.form</field>
         <field name="model">devfind.developer</field>
-        <field name="type">form</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Developer Name"/>
+                        </h1>
+                    </div>
                     <group>
-                        <field name="name"/>
-                        <field name="email"/>
-                        <field name="technology_ids" widget="many2many_tags"/>
-                        <field name="min_hourly_rate"/>
-                        <field name="max_hourly_rate"/>
+                        <group>
+                            <field name="email" placeholder="developer@example.com"/>
+                            <field name="min_hourly_rate" widget="monetary"/>
+                            <field name="max_hourly_rate" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="technology_count"/>
+                            <field name="technologies_list" readonly="1"/>
+                        </group>
                     </group>
+                    <notebook>
+                        <page string="Technologies">
+                            <field name="technology_ids" widget="many2many_tags" 
+                                   options="{'no_create': True, 'no_create_edit': True}"
+                                   placeholder="Select technologies..."/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_developer_tree" model="ir.ui.view">
-        <field name="name">devfind.developer.list</field>
-        <field name="model">devfind.developer</field>
-        <field name="type">list</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="min_hourly_rate"/>
-                <field name="max_hourly_rate"/>
-            </list>
-        </field>
-    </record>
-
+    <!-- Action -->
     <record id="action_developer" model="ir.actions.act_window">
         <field name="name">Developers</field>
         <field name="res_model">devfind.developer</field>
         <field name="view_mode">list,form</field>
     </record>
+
+    <!-- Menu Item -->
+    <menuitem 
+        id="menu_developer"
+        name="Developers"
+        action="action_developer"/>
 </odoo>
