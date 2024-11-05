@@ -1,5 +1,5 @@
 {
-    'name': 'DevFind',
+    'name': 'devfind',
     'version': '1.0',
     'summary': 'Developer Finding App',  
     'description': 'Module for finding and managing developers', 
@@ -8,6 +8,9 @@
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
+        'views/developer_views.xml',
+        'views/technology_views.xml',
+        'views/tech_dev_mapper_views.xml',
     ],
     'installable': True,
     'application': True,
