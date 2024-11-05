@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_developer,access_developer,model_devfind_developer,base.group_user,1,1,1,1
+access_technology,access_technology,model_devfind_technology,base.group_user,1,1,1,1
