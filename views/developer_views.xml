@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_developer_form" model="ir.ui.view">
+        <field name="name">devfind.developer.form</field>
+        <field name="model">devfind.developer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="technology_ids" widget="many2many_tags"/>  <!-- This will render checkboxes -->
+                        <field name="min_hourly_rate"/>
+                        <field name="max_hourly_rate"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_developer_tree" model="ir.ui.view">
+        <field name="name">devfind.developer.tree</field>
+        <field name="model">devfind.developer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="min_hourly_rate"/>
+                <field name="max_hourly_rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_developer" model="ir.actions.act_window">
+        <field name="name">Developers</field>
+        <field name="res_model">devfind.developer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_devfind_developer" name="Developers" action="action_developer" parent="base.menu_custom"/>
+</odoo>
