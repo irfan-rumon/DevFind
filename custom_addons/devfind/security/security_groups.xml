@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Define service category if not using existing -->
+        <record id="module_category_devfind" model="ir.module.category">
+            <field name="name">DevFind</field>
+            <field name="description">Developer Finding Platform</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Developer Group -->
+        <record id="group_developer" model="res.groups">
+            <field name="name">Developer</field>
+            <field name="category_id" ref="module_category_devfind"/>
+            <field name="comment">Users with developer access rights</field>
+        </record>
+
+        <!-- Manager Group -->
+        <record id="group_devfind_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_devfind"/>
+            <field name="implied_ids" eval="[(4, ref('group_developer'))]"/>
+            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="comment">Users with manager access rights</field>
+        </record>
+    </data>
+</odoo>

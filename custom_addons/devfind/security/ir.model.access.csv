@@ -1,3 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_developer,access_developer,model_devfind_developer,base.group_user,1,1,1,1
-access_technology,access_technology,model_devfind_technology,base.group_user,1,1,1,1
+access_developer_developer,developer.developer,model_devfind_developer,devfind.group_developer,1,1,0,0
+access_developer_manager,developer.manager,model_devfind_developer,devfind.group_devfind_manager,1,1,1,1
+access_developer_public,developer.public,model_devfind_developer,base.group_public,1,1,1,0
+access_technology_developer,technology.developer,model_devfind_technology,devfind.group_developer,1,0,0,0
+access_technology_manager,technology.manager,model_devfind_technology,devfind.group_devfind_manager,1,1,1,1
