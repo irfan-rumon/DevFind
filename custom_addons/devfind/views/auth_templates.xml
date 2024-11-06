@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="developer_registration_template" name="Developer Registration">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2 class="text-center">Developer Registration</h2>
+                        <form action="/developer/register/submit" method="post" class="mt-4">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" required="1"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" required="1"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" required="1"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" required="1"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" class="form-control" name="phone"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" name="gender" required="1">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="min_hourly_rate">Minimum Hourly Rate</label>
+                                <input type="number" class="form-control" name="min_hourly_rate" required="1"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="max_hourly_rate">Maximum Hourly Rate</label>
+                                <input type="number" class="form-control" name="max_hourly_rate" required="1"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="github_profile">GitHub Profile</label>
+                                <input type="url" class="form-control" name="github_profile"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="linkedin_profile">LinkedIn Profile</label>
+                                <input type="url" class="form-control" name="linkedin_profile"/>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
