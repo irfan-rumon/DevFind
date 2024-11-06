@@ -9,8 +9,24 @@ class Developer(models.Model):
         ('email_unique', 'unique(email)', 'Email must be unique!')
     ]
 
-    name = fields.Char(string='Name', required=True)
-    email = fields.Char(string='Email', required=True)
+     # Add user_id field (Many2one relationship with res.users)
+    user_id = fields.Many2one(
+        'res.users',
+        string='User',
+        ondelete='cascade',  # Automatically delete the developer record if the associated user is deleted
+        required=True
+    )
+
+
+    first_name = fields.Char(string="First Name", required=True)
+    last_name = fields.Char(string="Last Name", required=True)
+    name = fields.Char(string="Name", compute='_compute_name', store=True)
+    email = fields.Char(string="Email", required=True)
+    phone = fields.Char(string="Phone")
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')], required=True)
+    password = fields.Char(string="Password", required=True)
+    github_profile = fields.Char(string="GitHub Profile")
+    linkedin_profile = fields.Char(string="LinkedIn Profile")
     
     technology_ids = fields.Many2many(
         'devfind.technology',
@@ -34,6 +50,11 @@ class Developer(models.Model):
         compute='_compute_technology_count'
     )
 
+    @api.depends('first_name', 'last_name')
+    def _compute_name(self):
+        for record in self:
+            record.name = f"{record.first_name} {record.last_name}"
+
     @api.depends('technology_ids')
     def _compute_technologies_list(self):
         for record in self:
@@ -52,7 +73,7 @@ class Developer(models.Model):
 
     @api.model
     def create(self, vals):
-        # Create user first
+        # Create user first if 'user_id' is not provided
         if 'user_id' not in vals:
             user_vals = {
                 'name': f"{vals.get('first_name', '')} {vals.get('last_name', '')}",
@@ -61,7 +82,12 @@ class Developer(models.Model):
                 'groups_id': [(4, self.env.ref('devfind.group_developer').id)],
                 'password': vals.get('password'),  # This should be coming from the registration form
             }
+
+            # Create the user record
             user = self.env['res.users'].create(user_vals)
+
+            # Assign the user_id to the developer record
             vals['user_id'] = user.id
-        
-        return super(Developer, self).create(vals)
+
+            # Proceed with the creation of the developer record
+            return super(Developer, self).create(vals)
