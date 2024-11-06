@@ -5,7 +5,7 @@
     'description': 'Module for finding and managing developers', 
     'category': 'Services',  
     'author': 'A S M IRFAN', 
-    'depends': ['base', 'web', 'mail'],
+    'depends': ['base', 'web'],
     'data': [
          # Load security first
         'security/security_groups.xml',

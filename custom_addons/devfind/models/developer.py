@@ -5,33 +5,13 @@ import re                                                     # Python's regular
 class Developer(models.Model):
     _name = 'devfind.developer'
     _description = 'Developer Information'
-    _inherits = {'res.users': 'user_id'}  # Inherit from res.users
-    
-    # Link to res.users
-    user_id = fields.Many2one(
-        'res.users', 
-        string='Related User', 
-        required=True, 
-        ondelete='cascade', 
-        auto_join=True
-    )
-    
-    # Personal Information
-    first_name = fields.Char(string='First Name', required=True)
-    last_name = fields.Char(string='Last Name', required=True)
-    name = fields.Char(compute='_compute_full_name', store=True)
-    age = fields.Integer(string='Age')
-    gender = fields.Selection([
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('other', 'Other')
-    ], string='Gender', required=True)
-    
-    # Contact Information
+    _sql_constraints = [
+        ('email_unique', 'unique(email)', 'Email must be unique!')
+    ]
+
+    name = fields.Char(string='Name', required=True)
     email = fields.Char(string='Email', required=True)
-    phone = fields.Char(string='Phone')
     
-    # Professional Information
     technology_ids = fields.Many2many(
         'devfind.technology',
         'tech_dev_mapper_rel',
@@ -39,36 +19,31 @@ class Developer(models.Model):
         'technology_id',
         string='Technologies'
     )
+
+    # Add this new computed field
     technologies_list = fields.Char(
         string='Technologies List',
         compute='_compute_technologies_list',
+        store=True
     )
+
     min_hourly_rate = fields.Float(string='Min Hourly Rate', required=True)
     max_hourly_rate = fields.Float(string='Max Hourly Rate', required=True)
-    github_profile = fields.Char(string='GitHub Profile')
-    linkedin_profile = fields.Char(string='LinkedIn Profile')
-    
-    _sql_constraints = [
-        ('email_unique', 'unique(email)', 'Email must be unique!')
-    ]
-    
-    @api.depends('first_name', 'last_name')
-    def _compute_full_name(self):
-        for record in self:
-            record.name = f"{record.first_name} {record.last_name}"
-    
+    technology_count = fields.Integer(
+        string='Technology Count',
+        compute='_compute_technology_count'
+    )
+
     @api.depends('technology_ids')
     def _compute_technologies_list(self):
         for record in self:
             record.technologies_list = ', '.join(record.technology_ids.mapped('name'))
-    
-    @api.constrains('email')
-    def _check_email(self):
+
+    @api.depends('technology_ids')
+    def _compute_technology_count(self):
         for record in self:
-            if record.email:
-                if not re.match(r"[^@]+@[^@]+\.[^@]+", record.email):
-                    raise ValidationError("Please enter a valid email address!")
-    
+            record.technology_count = len(record.technology_ids)
+
     @api.constrains('min_hourly_rate', 'max_hourly_rate')
     def _check_hourly_rates(self):
         for record in self:
