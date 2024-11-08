@@ -4,7 +4,7 @@
     <menuitem 
         id="menu_devfind_root"
         name="DevFind"
-        sequence="10"/>
+        sequence="1"/>
 
     <!-- Developer submenu -->
     <menuitem 
@@ -12,7 +12,7 @@
         name="Developers"
         parent="menu_devfind_root"
         action="action_developer"
-        sequence="1"/>
+        sequence="11"/>
 
     <!-- Technology submenu -->
     <menuitem 
@@ -20,7 +20,14 @@
         name="Technologies"
         parent="menu_devfind_root"
         action="action_technology"
-        sequence="2"/>
+        sequence="22"/>
+
+    <menuitem 
+        id="menu_devfind_developer_directory"
+        name="Developer Directory"
+        parent="menu_devfind_root"
+        action="action_developer_list_client"
+        sequence="33"/>
 
   
 </odoo>

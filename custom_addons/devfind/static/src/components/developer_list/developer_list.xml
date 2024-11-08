@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="devfind.DeveloperList" owl="1">
+        <div class="container p-4">
+            <div class="row mb-4">
+                <div class="col">
+                    <h2>Developers Directory</h2>
+                </div>
+            </div>
+            
+            <div t-if="state.loading" class="text-center">
+                <i class="fa fa-spinner fa-spin fa-2x"/>
+                <p>Loading developers...</p>
+            </div>
+            
+            <div t-else="" class="row">
+                <div t-foreach="state.developers" t-as="dev" t-key="dev.id" 
+                     class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title" t-esc="dev.name"/>
+                            <p class="card-text">
+                                <i class="fa fa-envelope mr-2"/>
+                                <span t-esc="dev.email"/>
+                            </p>
+                            <p class="card-text">
+                                <strong>Technologies: </strong>
+                                <span t-esc="dev.technologies_list"/>
+                            </p>
+                            <p class="card-text">
+                                <strong>Hourly Rate: </strong>
+                                $<t t-esc="dev.min_hourly_rate"/> - $<t t-esc="dev.max_hourly_rate"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div t-if="!state.loading and state.developers.length === 0" 
+                 class="alert alert-info text-center">
+                No developers found.
+            </div>
+        </div>
+    </t>
+</templates>
