@@ -13,17 +13,10 @@
         # Then load views
         'views/auth_templates.xml',
         'views/developer_views.xml',
-        'views/developer_templates.xml',
         'views/technology_views.xml',
         'views/menus.xml'
     ],
-    'assets': {
-        'web.assets_backend': [
-            'devfind/static/src/components/developer_list/developer_list.js',
-            'devfind/static/src/components/developer_list/developer_list.xml',
-            'devfind/static/src/components/developer_list/developer_list.scss',
-        ],
-    },
+   
     'installable': True,
     'application': True,
     'license': 'LGPL-3',

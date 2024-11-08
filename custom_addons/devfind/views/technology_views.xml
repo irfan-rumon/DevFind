@@ -16,17 +16,18 @@
         </field>
     </record>
 
-    <!-- List View -->
+    <!-- Tree View -->
     <record id="view_technology_tree" model="ir.ui.view">
         <field name="name">devfind.technology.list</field>
         <field name="model">devfind.technology</field>
-        <field name="type">list</field>
+        <field name="type">tree</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="name"/>
-            </list>
+            </tree>
         </field>
     </record>
+  
 
      <!-- Action -->
     <record id="action_technology" model="ir.actions.act_window">

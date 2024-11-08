@@ -58,19 +58,19 @@
         </field>
     </record>
 
-    <!-- List View -->
+    <!-- List/Tree View -->
     <record id="view_developer_tree" model="ir.ui.view">
         <field name="name">devfind.developer.tree</field>
         <field name="model">devfind.developer</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="name"/>
                 <field name="email"/>
                 <field name="technologies_list"/>
                 <field name="min_hourly_rate"/>
                 <field name="max_hourly_rate"/>
                 <field name="technology_count"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -78,7 +78,7 @@
     <record id="action_developer" model="ir.actions.act_window">
         <field name="name">Developers</field>
         <field name="res_model">devfind.developer</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_developer_search"/>
     </record>
 </odoo>

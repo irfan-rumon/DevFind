@@ -22,12 +22,7 @@
         action="action_technology"
         sequence="22"/>
 
-    <menuitem 
-        id="menu_devfind_developer_directory"
-        name="Developer Directory"
-        parent="menu_devfind_root"
-        action="action_developer_list_client"
-        sequence="33"/>
+   
 
   
 </odoo>
